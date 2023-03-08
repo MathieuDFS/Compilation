@@ -5,8 +5,10 @@ NWG_LEXEM_REGEXES = [
     # Special characters and backlines
     (r"\:", "COLON"),
     (r"\-", "MINUS"),
+    (r"//", "BACKLINE"),
+    (r"\*", "MULT"),
     # Keywords
-    (r"fleets", "KW_FLEETS"),
+    (r"Fleets", "KW_FLEETS"),
     (r"fleet", "KW_FLEET"),
     (r"factions", "KW_FACTIONS"),
     (r"relations", "KW_RELATIONS"),

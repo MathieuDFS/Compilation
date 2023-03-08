@@ -2,6 +2,6 @@ from Compiler.NavalWargamingLexer import NavalWargamingLexem, NavalWargamingLexe
 
 if __name__ == "__main__":
     L = NavalWargamingLexer()
-    print(L.lex_file("../examples/unit_exemple1.nwg"))
+    print(L.lex_file("../examples/unit_exemple4.nwg"))
 
 
