@@ -1,0 +1,21 @@
+# test la définition de la carte
+
+Factions:
+    -US
+    -Chine
+
+Relations:
+    -US-Chine: -50
+
+fleet :
+    US fleet:
+        -flottille Charlie:
+            -1 croiseur
+
+    Chine fleet:
+        -flottille Alpha:
+            -2 destroyer
+
+map:
+    1000x1000
+

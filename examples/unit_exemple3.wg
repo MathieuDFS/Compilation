@@ -1,0 +1,34 @@
+# test la définition des flottes de chaque factions
+
+Factions:
+    -US
+    -Chine
+
+Relations:
+    -US-Chine: -50
+
+fleet :
+    US fleet:
+        -flottille Charlie:
+            -2 destroyer
+            -1 croiseur
+            -1 porte avion
+
+        -flottille Delta:
+            -1 croiseur
+            -1 porte avion
+
+    Chine fleet:
+        -flottille Alpha:
+            -2 destroyer
+            -1 croiseur
+            -1 porte avion
+
+        -flottille Beta:
+            -1 croiseur
+            -1 porte avion
+
+
+
+
+

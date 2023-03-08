@@ -1,0 +1,8 @@
+# test la définition des factions
+Factions:
+    -US
+    -Chine
+    -Russie
+    -France
+    -Commerce
+    -Pirate
