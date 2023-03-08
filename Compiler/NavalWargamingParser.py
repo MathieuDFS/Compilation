@@ -1,0 +1,6 @@
+
+
+
+
+class NavalWargamingParser:
+    pass
