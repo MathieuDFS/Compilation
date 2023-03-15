@@ -7,7 +7,7 @@ Factions:
 Relations:
     -US-Chine: -50
 
-fleet :
+Fleets :
     US fleet:
         -flottille Charlie:
             -1 croiseur
@@ -16,6 +16,6 @@ fleet :
         -flottille Alpha:
             -2 destroyer
 
-map:
-    1000x1000
+Map:
+    1000*1000
 
