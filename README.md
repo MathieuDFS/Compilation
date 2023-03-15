@@ -22,14 +22,15 @@ Faire un compilateur pour un langage de programmation pour le wargaming.
 Faire l'essemble de ces étapes pour un langage de programmation simple. Puis le complexifier incrementalement.
 
 ## Grammaire
-- _program_ := _etat_inital_  _actions_  
-- _etat_inital_ := (_factions_)? (_relations_)? (_flottes_)? _terrain_  
-- _factions_ := Factions (- _identifier_)*  
-- _relations_ := Relations (- _relation_faction_)*  
-- _relation_faction_ := _identifier_ - _identifier_ :int  
-- _flottes_ := Fleets _flotte_faction_*  
-- _flotte_faction_ := _identifier_  fleet : (_flotille_ )* 
-- _flotille_ = - _identifier_ : _navires_ _navires_*   
-- _navires_ = - - int _batiment_
-- _batiment_ = croiseur | destroyer | sous-marin | porte-avion | torpilleur | bombardier | chasseur | transporteur
-- _terrain_ := -int * int  
+- _Program_ := _Initial_State_  _actions_  
+- _Initial_State_ := (_Factions_)? (_Relations_)? (_Fleets_)? _terrain_  
+- _Factions_ := Factions _Faction_*
+- _Faction_ := - _identifier_
+- _Relations_ := Relations (- _Relation_)*  
+- _Relation_ := _identifier_ - _identifier_ :int  
+- _Fleets_ := Fleets _Faction_Fleet_*  
+- _Faction_Fleet_ := _identifier_  fleet : (_Flotilla_ )* 
+- _Flotilla_ = - _identifier_ : _Vessel_ _Vessel_*   
+- _Vessel_ = - - int _Vessel_Type_
+- _Vessel_Type_ = croiseur | destroyer | sous-marin | porte-avion | torpilleur | bombardier | chasseur | transporteur
+- _Terrain_ := -int * int  
