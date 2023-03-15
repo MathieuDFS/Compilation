@@ -7,7 +7,7 @@ Factions:
 Relations:
     -US-Chine: -50
 
-fleet :
+Fleets :
     US fleet:
         -flottille Charlie:
             -2 destroyer
