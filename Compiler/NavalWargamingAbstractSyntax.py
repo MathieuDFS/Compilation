@@ -1,4 +1,8 @@
 
+class Abstract_Syntax_Tree():
+    """Abstract Syntax Tree"""
+    pass
+
 class AST_Node():
     """Abstract class for AST nodes"""
     pass
@@ -12,11 +16,11 @@ class Program(AST_Node):
 
 
 class Initial_State(AST_Node):
-    def __init__(self, terrain, factions, relations, fleets):
-        self.factions: list(Factions) = factions
-        self.relations: list(Relations) = relations
-        self.fleets: list(Fleets) = fleets
-        self.terrain : Terrain = terrain
+    def __init__(self, factions, relations, fleets,terrain):
+        self.factions: Factions = factions
+        self.relations: Relations = relations
+        self.fleets: Fleets = fleets
+        self.terrain: Terrain = terrain
 
 class Action(AST_Node):
     pass #todo
@@ -25,8 +29,8 @@ class Factions(AST_Node):
     def __init__(self, faction_list):
         self.faction_list: list(Faction) = faction_list
 class Faction(AST_Node):
-    def __init__(self, name):
-        self.name: str = name
+    def __init__(self, identifier):
+        self.identifier: Identifier = identifier
 
 class Relations:
     def __init__(self, relation_list):
@@ -47,8 +51,8 @@ class Faction_Fleet(AST_Node):
         self.flotilla_list: list(Flotilla) = flotilla_list
 
 class Flotilla(AST_Node):
-    def __init__(self, name, vessels):
-        self.name: str = name
+    def __init__(self, identifier, vessels):
+        self.identifier: Identifier = identifier
         self.vessels: list(Vessel) = vessels
 
 class Vessel(AST_Node):
@@ -64,3 +68,7 @@ class Terrain(AST_Node):
     def __init__(self, x,y):
         self.x: int = x
         self.y: int = y
+
+class Identifier(AST_Node):
+    def __init__(self, name):
+        self.name: str = name
