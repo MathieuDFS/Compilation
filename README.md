@@ -24,14 +24,14 @@ Faire l'essemble de ces étapes pour un langage de programmation simple. Puis le
 
 ## Grammaire
 - _Program_ := _Initial_State_  _actions_  
-- _Initial_State_ := (_Factions_)? (_Relations_)? (_Fleets_)? _terrain_  
+- _Initial_State_ := (_Factions_)? (_Relations_)? (_Fleets_)? _Map_  
 - _Factions_ := Factions: _Faction_*
 - _Faction_ := - _identifier_
 - _Relations_ := Relations: _Relation_*  
 - _Relation_ := -_identifier_ - _identifier_ : _int_  
 - _Fleets_ := Fleets: _Faction_Fleet_*  
-- _Faction_Fleet_ := _identifier_  fleet: _Flotilla_ * 
+- _Faction_Fleet_ := -_identifier_  fleet: _Flotilla_ * 
 - _Flotilla_ := - _identifier_ : _Vessel_ _Vessel_*   
 - _Vessel_ := - int _Vessel_Type_
 - _Vessel_Type_ := croiseur | destroyer | sous-marin | porte-avion | torpilleur | bombardier | chasseur | transporteur
-- _Terrain_ := -int*int  
+- _Map_ := -int*int  

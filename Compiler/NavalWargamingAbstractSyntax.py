@@ -12,29 +12,29 @@ class AST_Node():
 class Program(AST_Node):
     def __init__(self,initial_State, actions):
         self.initial_State: Initial_State = initial_State
-        self.actions: list(Action) = actions
+        self.actions: list[Action] = actions
 
 
 class Initial_State(AST_Node):
-    def __init__(self, factions, relations, fleets,terrain):
+    def __init__(self, factions, relations, fleets,map):
         self.factions: Factions = factions
         self.relations: Relations = relations
         self.fleets: Fleets = fleets
-        self.terrain: Terrain = terrain
+        self.map: Map = map
 
 class Action(AST_Node):
     pass #todo
 
 class Factions(AST_Node):
     def __init__(self, faction_list):
-        self.faction_list: list(Faction) = faction_list
+        self.faction_list: list[Faction] = faction_list
 class Faction(AST_Node):
     def __init__(self, identifier):
         self.identifier: Identifier = identifier
 
 class Relations:
     def __init__(self, relation_list):
-        self.relation_list: list(Relation) = relation_list
+        self.relation_list: list[Relation] = relation_list
 class Relation(AST_Node):
     def __init__(self, faction1, faction2, relation):
         self.faction1: str = faction1
@@ -43,17 +43,17 @@ class Relation(AST_Node):
 
 class Fleets(AST_Node):
     def __init__(self, faction_fleet):
-        self.faction_fleet: list(Faction_Fleet) = faction_fleet
+        self.faction_fleet: list[Faction_Fleet] = faction_fleet
 
 class Faction_Fleet(AST_Node):
     def __init__(self, faction,flotilla_list):
         self.faction: str = faction
-        self.flotilla_list: list(Flotilla) = flotilla_list
+        self.flotilla_list: list[Flotilla] = flotilla_list
 
 class Flotilla(AST_Node):
     def __init__(self, identifier, vessels):
         self.identifier: Identifier = identifier
-        self.vessels: list(Vessel) = vessels
+        self.vessels: list[Vessel] = vessels
 
 class Vessel(AST_Node):
     def __init__(self, number, vessel_type):
@@ -64,7 +64,7 @@ class Vessel_type(AST_Node):
     def __init__(self, type):
         self.type:str = type
 
-class Terrain(AST_Node):
+class Map(AST_Node):
     def __init__(self, x,y):
         self.x: int = x
         self.y: int = y

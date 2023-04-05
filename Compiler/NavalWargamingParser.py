@@ -44,7 +44,7 @@ class NavalWargamingParser:
             )
         return self.accept()
 
-    def remove_comments(self):
+    def remove_comments(self): #todo supprimer ou adapter les constants
         """
         Removes the comments from the token list by testing their tags.
         """
@@ -72,7 +72,6 @@ class NavalWargamingParser:
         FleetsTree = None
 
         if(self.show_next().tag == "KW_FACTIONS"):
-            print("Factions")
             self.expect("KW_FACTIONS")
             self.expect("COLON")
             factionList = []
@@ -82,7 +81,6 @@ class NavalWargamingParser:
             FactionsTree = Factions(factionList)
 
         if(self.show_next().tag == "KW_RELATIONS"):
-            print("Relations")
             self.expect("KW_RELATIONS")
             self.expect("COLON")
             relationList = []
@@ -91,32 +89,93 @@ class NavalWargamingParser:
                 relationList.append(relation)
             RelationsTree = Relations(relationList)
 
+        if(self.show_next().tag == "KW_FLEETS"):
+            self.expect("KW_FLEETS")
+            self.expect("COLON")
+            fleetList = []
+            while (self.show_next().tag == "MINUS"):
+                fleet = self.parse_faction_fleet()
+                fleetList.append(fleet)
+            FleetsTree = Fleets(fleetList)
+
+        map=self.parse_map()
+
         AST=Program(Initial_State(FactionsTree,RelationsTree,FleetsTree,None),[])
 
     def parse_faction(self):
-        print("Faction")
         self.expect("MINUS")
         faction = Faction(self.parse_identifier())
         return faction
 
     def parse_relation(self):
-        print("Relation")
         self.expect("MINUS")
         faction1 = self.parse_identifier()
         self.expect("MINUS")
         faction2 = self.parse_identifier()
         self.expect("COLON")
         relation = self.show_next().value
-        print(self.show_next().value)
         self.expect("INT")
         return Relation(faction1,faction2,relation)
 
+    def parse_faction_fleet(self):
+        self.expect("MINUS")
+        faction = self.parse_identifier()
+        self.expect("KW_FLEET")
+        self.expect("COLON")
+        FlotillaList = []
+        while (self.starter_test_flotilla()):
+            ship = self.parse_Flotilla()
+            FlotillaList.append(ship)
+        faction_fleet = Faction_Fleet(faction, FlotillaList)
+        return faction_fleet
+
+    def parse_Flotilla(self):
+        self.expect("MINUS")
+        flotilla_name = self.parse_identifier()
+        self.expect("COLON")
+        VesselList = []
+        # Minimum 1 vessel
+        vessel = self.parse_vessel()
+        VesselList.append(vessel)
+        while (self.show_next().tag == "INT"):
+            vessel = self.parse_vessel()
+            VesselList.append(vessel)
+        flotilla = Flotilla(flotilla_name, VesselList)
+        return flotilla
+
+    def parse_vessel(self):
+        number = self.show_next().value
+        self.expect("INT")
+        vessel_type = self.parse_vessel_type()
+        return Vessel(number, vessel_type)
+
+    def parse_vessel_type(self):
+        vessel_type = Vessel_type(self.show_next().value)
+        self.expect("IDENT")
+        return vessel_type
+
+    def parse_map(self):
+        self.expect("KW_MAP")
+        self.expect("COLON")
+        x = self.show_next().value
+        self.expect("INT")
+        self.expect("MULT")
+        y = self.show_next().value
+        self.expect("INT")
+        map = Map(x,y)
+        return map
+
     def parse_identifier(self):
         ident = Identifier(self.show_next().value)
-        print(ident.name)
         self.expect("IDENT")
         return ident
 
     # ==============================
     #     Starter tests Functions
     # ==============================
+
+    def starter_test_flotilla(self):
+        if (self.show_next().tag == "MINUS"):
+            if(self.show_next(3).tag == "COLON"):
+                return True
+        return False
