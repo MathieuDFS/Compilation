@@ -34,7 +34,7 @@ class Initial_State(AST_Node):
         visitor.visitInitial_State(self)
 
 class Action(AST_Node):
-    pass # TODO
+    pass # TODO (also add to visitor)
 
 class Factions(AST_Node):
     def __init__(self, faction_list):
