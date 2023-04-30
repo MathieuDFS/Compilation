@@ -12,7 +12,14 @@ class AST_Node():
         """Accept a visitor (pattern visitor)"""
         pass
 
+class Empty(AST_Node):
+    """Empty node
+    Used for empty field in the AST to allow visitor"""
+    def __init__(self):
+        pass
 
+    def accept(self, visitor):
+        print("Empty node")
 
 class Program(AST_Node):
     def __init__(self,initial_State, actions):

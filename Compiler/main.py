@@ -1,6 +1,7 @@
 from Compiler.NavalWargamingLexer import NavalWargamingLexem, NavalWargamingLexer
 from Compiler.NavalWargamingParser import NavalWargamingParser
 from PrettyPrinter import PrettyPrinter
+from EmptyVisitor import EmptyVisitor
 
 if __name__ == "__main__":
     L = NavalWargamingLexer()
@@ -9,6 +10,9 @@ if __name__ == "__main__":
     parser = NavalWargamingParser(L.lex_file("../examples/unit_exemple2.nwg"))
     AST = parser.parse()
     print("parse done")
+    EmptyVisitor = EmptyVisitor()
+    EmptyVisitor.visit(AST)
+    print("First visit done")
     PrettyPrint = PrettyPrinter()
     PrettyPrint.visit(AST)
 
