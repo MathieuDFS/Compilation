@@ -3,10 +3,23 @@ Projet scolaire de création d'un compilateur
 
 ## Attendus théoriques
 - [X] un lexer
-- [ ] un parser
-- [ ] un ast
+- [X] un parser
+- [X] un ast 
 - [ ] un visiteur
 - [ ] une documentation
+
+## Feuille de route
+- [X] une grammaire de base
+- [X] des exemples de programmes
+- [X] un lexer (fonctionnel sur les exemples)
+- [X] un parser (fonctionnel sur les exemples)
+- [ ] un pretty printer (qui réécrit le programme proprement)
+- [ ] Analyseur contextuel
+- [ ] Permettre l'exécution des exemples ....
+- [ ] ...
+- [ ] une documentation
+
+Complexifier le langage incrementalement.
 
 ## Idée du projet
 
