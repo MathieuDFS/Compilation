@@ -48,3 +48,4 @@ Faire l'essemble de ces étapes pour un langage de programmation simple. Puis le
 - _Vessel_ := - int _Vessel_Type_
 - _Vessel_Type_ := croiseur | destroyer | sous-marin | porte-avion | torpilleur | bombardier | chasseur | transporteur
 - _Map_ := -int*int  
+- _Identifier_ := str

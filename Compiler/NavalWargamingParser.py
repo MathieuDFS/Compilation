@@ -60,7 +60,8 @@ class NavalWargamingParser:
         """
         try:
             self.remove_comments()
-            self.parse_program()
+            AST = self.parse_program()
+            return AST
         except ParsingException as err:
             logger.exception(err)
             raise
@@ -100,7 +101,8 @@ class NavalWargamingParser:
 
         map=self.parse_map()
 
-        AST=Program(Initial_State(FactionsTree,RelationsTree,FleetsTree,None),[])
+        AST=Program(Initial_State(FactionsTree,RelationsTree,FleetsTree,map),[])
+        return AST
 
     def parse_faction(self):
         self.expect("MINUS")

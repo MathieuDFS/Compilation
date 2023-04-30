@@ -41,10 +41,6 @@ class Visitor(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def visitFleet(self, Fleet):
-        pass
-
-    @abstractmethod
     def visitFlotilla(self, Flotilla):
         pass
 
