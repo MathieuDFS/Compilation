@@ -63,7 +63,7 @@ class EmptyVisitor(Visitor):
                 fleet.accept(self)
 
     def visitFaction_Fleet(self, Faction_Fleet):
-        Faction_Fleet.identifier.accept(self)
+        Faction_Fleet.faction.accept(self)
 
         if(Faction_Fleet.flotilla_list == []):
             Faction_Fleet.flotilla_list = [Empty()]
@@ -73,7 +73,7 @@ class EmptyVisitor(Visitor):
 
     def visitFlotilla(self, Flotilla):
         Flotilla.identifier.accept(self)
-        for vessel in Flotilla.vessel_list:
+        for vessel in Flotilla.vessels:
             vessel.accept(self)
 
     def visitVessel(self, Vessel):

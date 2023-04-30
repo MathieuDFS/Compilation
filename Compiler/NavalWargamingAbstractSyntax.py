@@ -66,8 +66,8 @@ class Relations:
 
 class Relation(AST_Node):
     def __init__(self, faction1, faction2, relation):
-        self.faction1: str = faction1
-        self.faction2: str = faction2
+        self.faction1: Identifier = faction1
+        self.faction2: Identifier = faction2
         self.relation: int = relation
 
     def accept(self, visitor):
@@ -82,8 +82,11 @@ class Fleets(AST_Node):
 
 class Faction_Fleet(AST_Node):
     def __init__(self, faction,flotilla_list):
-        self.faction: str = faction
+        self.faction: Identifier = faction
         self.flotilla_list: list[Flotilla] = flotilla_list
+
+    def accept(self, visitor):
+        visitor.visitFaction_Fleet(self)
 
 class Flotilla(AST_Node):
     def __init__(self, identifier, vessels):
@@ -106,7 +109,7 @@ class Vessel_type(AST_Node):
         self.type:str = type
 
     def accept(self, visitor):
-        visitor.visitVessel_type(self)
+        visitor.visitVessel_Type(self)
 
 
 class Map(AST_Node):

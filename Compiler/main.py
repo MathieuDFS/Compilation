@@ -5,16 +5,16 @@ from EmptyVisitor import EmptyVisitor
 
 if __name__ == "__main__":
     L = NavalWargamingLexer()
-    print(L.lex_file("../examples/unit_exemple2.nwg"))
+    # print(L.lex_file("../examples/unit_exemple2.nwg"))
     print("Parsing...")
-    parser = NavalWargamingParser(L.lex_file("../examples/unit_exemple2.nwg"))
+    parser = NavalWargamingParser(L.lex_file("../examples/unit_exemple4.nwg"))
     AST = parser.parse()
     print("parse done")
     EmptyVisitor = EmptyVisitor()
     EmptyVisitor.visit(AST)
     print("First visit done")
     PrettyPrint = PrettyPrinter()
-    PrettyPrint.visit(AST)
+    PrettyPrint.visit(AST,"Example4")
 
 
 

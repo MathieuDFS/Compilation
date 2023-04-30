@@ -3,16 +3,17 @@ from AbstractVisitor import Visitor
 
 
 class PrettyPrinter(Visitor):
-    def __int__(self,output):
-        self.output = output
+    def __int__(self):
+        self.filename = None
         self.file = None
 
-    def visit(self, Program):
+    def visit(self, Program, Filename):
+        self.filename: str = Filename
         Program.accept(self)
 
     def visitProgram(self, Program):
-        self.file = open("test.nwg", "w")
-        self.file.write("#Program Pretty print\n")
+        self.file = open(self.filename+".pp.nwg", "w")
+        self.file.write("#"+self.filename+" Pretty print\n")
         Program.initial_State.accept(self)
         for action in Program.actions:
             action.accept(self)
@@ -25,48 +26,64 @@ class PrettyPrinter(Visitor):
         Initial_State.map.accept(self)
 
     def visitFactions(self, Factions):
+        self.file.write("\n")
+        self.file.write("Factions:\n")
         for faction in Factions.faction_list:
             faction.accept(self)
 
     def visitFaction(self, Faction):
+        self.file.write("\t-")
         Faction.identifier.accept(self)
+        self.file.write("\n")
 
     def visitRelations(self, Relations):
+        self.file.write("\n")
+        self.file.write("Relations:\n")
         for relation in Relations.relation_list:
             relation.accept(self)
 
     def visitRelation(self, Relation):
+        self.file.write("\t-")
         Relation.faction1.accept(self)
+        self.file.write("-")
         Relation.faction2.accept(self)
-        # Relation.relation
+        self.file.write(": ")
+        self.file.write(Relation.relation+"\n")
 
     def visitFleets(self, Fleets):
+        self.file.write("\n")
+        self.file.write("Fleets:\n")
         for fleet in Fleets.faction_fleet:
             fleet.accept(self)
 
     def visitFaction_Fleet(self, Faction_Fleet):
-        Faction_Fleet.identifier.accept(self)
+        self.file.write("\t-")
+        Faction_Fleet.faction.accept(self)
+        self.file.write(" fleet:\n")
         for flotilla in Faction_Fleet.flotilla_list:
             flotilla.accept(self)
 
     def visitFlotilla(self, Flotilla):
+        self.file.write("\t\t-")
         Flotilla.identifier.accept(self)
-        for vessel in Flotilla.vessel_list:
+        self.file.write(":\n")
+        for vessel in Flotilla.vessels:
             vessel.accept(self)
+        self.file.write("\n")
 
     def visitVessel(self, Vessel):
-        # Vessel.number
+        self.file.write("\t\t\t")
+        self.file.write(Vessel.number + " ")
         Vessel.vessel_type.accept(self)
 
     def visitVessel_Type(self, Vessel_Type):
-        # Vessel_Type.type
-        pass
+        self.file.write(Vessel_Type.type + "\n")
+
 
     def visitMap(self, Map):
-        # Map.x
-        # Map.y
-        pass
+        self.file.write("Map:\n")
+        self.file.write("\t")
+        self.file.write(str(Map.x) + "*" + str(Map.y) + "\n")
 
     def visitIdentifier(self, Identifier):
-        # Identifier.name
-        pass
+        self.file.write(Identifier.name)
