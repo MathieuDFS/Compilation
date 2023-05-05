@@ -1,5 +1,5 @@
 
-class Abstract_Syntax_Tree():
+class Abstract_Syntax_Tree(): #todo delete?
     """Abstract Syntax Tree"""
     pass
 
