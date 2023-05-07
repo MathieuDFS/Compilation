@@ -11,13 +11,13 @@ class NavalWargamingVariable():
         self.faction = []
         self.relation= {}
         self.navy = {}
-        self.flotilla = set()
+        self.map = ()
 
     def normalize_countries(self,countries, separator="-"):
         return separator.join(sorted(countries.split(separator)))
 
     def __str__(self):
-        return ("Factions: " + str(self.faction) + "\nRelations: " + str(self.relation))
+        return ("Factions: " + str(self.faction) + "\nRelations: " + str(self.relation) + "\nNavy: " + str(self.navy)+ "\nMap: " + str(self.map))
 
     #######################
     # Faction declaration
@@ -62,7 +62,37 @@ class NavalWargamingVariable():
     # Fleet declaration
     #######################
 
+    def addFactionFleet(self,Faction_Fleet):
+        if Faction_Fleet.faction.name not in self.faction:
+            raise ValueError("In faction fleet, Faction "+Faction_Fleet.faction.name+" not declared")
+        elif Faction_Fleet.faction.name in self.navy:
+            raise ValueError("Faction fleet "+Faction_Fleet.faction.name+" already declared")
+        else:
+            self.navy[Faction_Fleet.faction.name] = {}
 
+    def addFlotilla(self,Flotilla,faction,vessels):
+        if faction.name not in self.faction:
+            raise ValueError("In Flotilla, Faction " + faction.name + " not declared")
+        elif faction.name not in self.navy:
+            raise ValueError("In Flotilla, Faction "+faction.name+" does not have faction fleet")
+        elif Flotilla.identifier.name in self.navy[faction.name]:
+            raise ValueError("Flotilla "+Flotilla.identifier.name+" already declared")
+        else:
+            self.navy[faction.name][Flotilla.identifier.name] = {}
+            for vessel in vessels:
+                self.navy[faction.name][Flotilla.identifier.name][vessel.vessel_type.type] = vessel.number
+
+    def testFactionWhithoutFleet(self):
+        for faction in self.faction:
+            if faction not in self.navy:
+                warnings.warn("Faction "+faction+" does not have any fleet")
+
+    #######################
+    # Map declaration
+    #######################
+
+    def setMap(self,x,y):
+        self.map = (x,y)
 
 
 class NavalWargaming():

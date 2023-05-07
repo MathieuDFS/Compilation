@@ -77,11 +77,13 @@ class SemanticVisitor(Visitor):
         if not Relations.relation_list:
             Relations.relation_list = [Empty()]
             warnings.warn("No relation declared")
+            # todo prendre en compte le cas pas de relation mais plusieurs factions
         else:
             self.nwgVariable.createRelationDataBase()
             for relation in Relations.relation_list:
                 relation.accept(self)
             self.nwgVariable.testRelationDeclaration()
+
 
 
     # def verify_relation_presence(self,Relations):
@@ -117,8 +119,10 @@ class SemanticVisitor(Visitor):
         else:
             for fleet in Fleets.faction_fleet:
                 fleet.accept(self)
+        self.nwgVariable.testFactionWhithoutFleet()
 
     def visitFaction_Fleet(self, Faction_Fleet):
+        self.nwgVariable.addFactionFleet(Faction_Fleet)
         Faction_Fleet.faction.accept(self)
         #
         # if Faction_Fleet.faction.name not in self.faction:
@@ -128,15 +132,27 @@ class SemanticVisitor(Visitor):
         #
         # self.navy[Faction_Fleet.faction.name] = {}
         #
-        # if (Faction_Fleet.flotilla_list == []):
-        #     Faction_Fleet.flotilla_list = [Empty()]
-        #     warnings.warn("No flotilla declared")
-        # else:
-        #     for flotilla in Faction_Fleet.flotilla_list:
-        #         flotilla.accept(self)
+        if (Faction_Fleet.flotilla_list == []):
+            Faction_Fleet.flotilla_list = [Empty()]
+            warnings.warn("No flotilla declared for faction fleet " + Faction_Fleet.faction.name + "")
+        else:
+            for flotilla in Faction_Fleet.flotilla_list:
+                flotilla.acceptAndTransmitFaction(self,Faction_Fleet.faction)
 
-    def visitFlotilla(self, Flotilla):
+    def visitFlotilla(self, Flotilla,faction=None):
+        if faction is None:
+            raise ValueError("Faction not transmitted")
+
         Flotilla.identifier.accept(self)
+
+        for vessel in Flotilla.vessels:
+            vessel.accept(self)
+
+        self.nwgVariable.addFlotilla(Flotilla,faction,Flotilla.vessels)
+
+
+
+
         # if(Flotilla.identifier.name in self.flotilla):
         #     raise ValueError("Flotilla " + Flotilla.identifier.name + " already declared")
         # self.flotilla.add(Flotilla.identifier.name)
@@ -156,9 +172,9 @@ class SemanticVisitor(Visitor):
             raise ValueError("Vessel type " + Vessel_Type.type + " not possible")
 
     def visitMap(self, Map):
-        print(Map.x)
         self.Test_MAP_Value(int(Map.x), "Map x")
         self.Test_MAP_Value(int(Map.y), "Map y")
+        self.nwgVariable.setMap(Map.x,Map.y)
 
     def Test_MAP_Value(self, mapValue, name):
         if (mapValue > config.MAP_MAX):

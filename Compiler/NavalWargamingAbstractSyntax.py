@@ -96,6 +96,9 @@ class Flotilla(AST_Node):
     def accept(self, visitor):
         visitor.visitFlotilla(self)
 
+    def acceptAndTransmitFaction(self, visitor, faction):
+        visitor.visitFlotilla(self, faction)
+
 class Vessel(AST_Node):
     def __init__(self, number, vessel_type):
         self.number: int = number
