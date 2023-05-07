@@ -3,7 +3,8 @@ import warnings
 
 from AbstractVisitor import Visitor
 from NavalWargamingAbstractSyntax import Empty, Identifier, Relation
-from NavalWargaming import *
+from NavalWargaming import NavalWargaming
+from NavalWargamingVariable import NavalWargamingVariable
 import config
 
 
@@ -16,11 +17,6 @@ class SemanticVisitor(Visitor):
 
     def __init__(self):
         self.nwgVariable =None
-        # self.faction = set()
-        # self.faction_multi_decl = set()
-        # self.relation= {}
-        # self.navy = {}
-        # self.flotilla = set()
 
     def reset(self):
         self.faction = set()
@@ -42,16 +38,21 @@ class SemanticVisitor(Visitor):
     def visitInitial_State(self, Initial_State):
         if (Initial_State.factions is None):
             Initial_State.factions = Empty()
+            warnings.warn("No faction declared")
         else:
             Initial_State.factions.accept(self)
 
+        self.nwgVariable.createRelationDataBase()
         if (Initial_State.relations is None):
             Initial_State.relations = Empty()
+            warnings.warn("No relation declared")
         else:
             Initial_State.relations.accept(self)
+        self.nwgVariable.testRelationDeclaration()
 
         if (Initial_State.fleets is None):
             Initial_State.fleets = Empty()
+            warnings.warn("No fleet declared")
         else:
             Initial_State.fleets.accept(self)
 
@@ -68,10 +69,6 @@ class SemanticVisitor(Visitor):
     def visitFaction(self, Faction):
         Faction.identifier.accept(self)
         self.nwgVariable.addFaction(Faction.identifier.name)
-        # if Faction.identifier.name in self.faction:
-        #     warnings.warn("Faction " + Faction.identifier.name + " already declared")
-        # else:
-        #     self.faction.add(Faction.identifier.name)
 
     def visitRelations(self, Relations):
         if not Relations.relation_list:
@@ -79,38 +76,13 @@ class SemanticVisitor(Visitor):
             warnings.warn("No relation declared")
             # todo prendre en compte le cas pas de relation mais plusieurs factions
         else:
-            self.nwgVariable.createRelationDataBase()
             for relation in Relations.relation_list:
                 relation.accept(self)
-            self.nwgVariable.testRelationDeclaration()
-
-
-
-    # def verify_relation_presence(self,Relations):
-    #     for faction in self.faction:
-    #         for faction2 in self.faction:
-    #             if faction != faction2:
-    #                 if self.normalize_countries(faction+"-"+faction2) not in self.relation:
-    #                     self.relation[self.normalize_countries(faction+"-"+faction2)] = 0
-    #                     Relations.relation_list.append(Relation(Identifier(faction),Identifier(faction2),str(0)))
-    #                     warnings.warn("Relation between "+faction+" and "+faction2+" not declared, set to 0")
 
     def visitRelation(self, Relation):
         Relation.faction1.accept(self)
         Relation.faction2.accept(self)
         self.nwgVariable.addRelation(Relation)
-
-        # if(Relation.faction1.name == Relation.faction2.name):
-        #     raise ValueError("Faction cannot be in relation with itself ("+Relation.faction1.name+")")
-        # elif(Relation.faction1.name not in self.faction):
-        #     raise ValueError("Faction "+Relation.faction1.name+" not declared")
-        # elif(Relation.faction2.name not in self.faction):
-        #     raise ValueError("Faction "+Relation.faction2.name+" not declared")
-        # elif(self.normalize_countries(Relation.faction1.name+"-"+Relation.faction2.name) in self.relation):
-        #     raise ValueError("Relation between "+Relation.faction1.name+" and "+Relation.faction2.name+" already declared")
-
-        # self.relation[self.normalize_countries(Relation.faction1.name+"-"+Relation.faction2.name)] = int(Relation.relation)
-
 
     def visitFleets(self, Fleets):
         if (Fleets.faction_fleet == []):
@@ -124,14 +96,7 @@ class SemanticVisitor(Visitor):
     def visitFaction_Fleet(self, Faction_Fleet):
         self.nwgVariable.addFactionFleet(Faction_Fleet)
         Faction_Fleet.faction.accept(self)
-        #
-        # if Faction_Fleet.faction.name not in self.faction:
-        #     raise ValueError("In faction fleet, Faction " + Faction_Fleet.faction.name + " not declared")
-        # elif (Faction_Fleet.faction.name in self.navy):
-        #     raise ValueError("Faction Fleet " + Faction_Fleet.faction.name + " already declared")
-        #
-        # self.navy[Faction_Fleet.faction.name] = {}
-        #
+
         if (Faction_Fleet.flotilla_list == []):
             Faction_Fleet.flotilla_list = [Empty()]
             warnings.warn("No flotilla declared for faction fleet " + Faction_Fleet.faction.name + "")
@@ -150,21 +115,7 @@ class SemanticVisitor(Visitor):
 
         self.nwgVariable.addFlotilla(Flotilla,faction,Flotilla.vessels)
 
-
-
-
-        # if(Flotilla.identifier.name in self.flotilla):
-        #     raise ValueError("Flotilla " + Flotilla.identifier.name + " already declared")
-        # self.flotilla.add(Flotilla.identifier.name)
-        #
-        # if (Flotilla.vessels == []):
-        #     raise ValueError("No vessel declared in flotilla " + Flotilla.identifier.name)
-        #
-        # for vessel in Flotilla.vessels:
-        #     vessel.accept(self)
-
     def visitVessel(self, Vessel):
-        # Vessel.number
         Vessel.vessel_type.accept(self)
 
     def visitVessel_Type(self, Vessel_Type):
@@ -185,5 +136,4 @@ class SemanticVisitor(Visitor):
             mapValue = config.MAP_MIN
 
     def visitIdentifier(self, Identifier):
-        # Identifier.name
         pass
