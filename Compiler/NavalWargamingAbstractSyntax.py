@@ -1,5 +1,5 @@
 
-class Abstract_Syntax_Tree():
+class Abstract_Syntax_Tree(): #todo delete?
     """Abstract Syntax Tree"""
     pass
 
@@ -95,6 +95,9 @@ class Flotilla(AST_Node):
 
     def accept(self, visitor):
         visitor.visitFlotilla(self)
+
+    def acceptAndTransmitFaction(self, visitor, faction):
+        visitor.visitFlotilla(self, faction)
 
 class Vessel(AST_Node):
     def __init__(self, number, vessel_type):
