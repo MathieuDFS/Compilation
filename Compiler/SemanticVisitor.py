@@ -17,12 +17,13 @@ class SemanticVisitor(Visitor):
 
     def __init__(self):
         self.nwgVariable =None
+        self.nwg = None
 
     def reset(self):
         self.faction = set()
 
     def InitializeWargame(self):
-        pass #todo
+        return NavalWargaming().initialization(self.nwgVariable)
 
     def visit(self, Program):
         self.reset()
