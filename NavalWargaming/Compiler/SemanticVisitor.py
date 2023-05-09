@@ -1,34 +1,27 @@
 import warnings
-
 from AbstractVisitor import Visitor
 from NavalWargamingAbstractSyntax import Empty
-from NavalWargaming.Simulation import NavalWargaming
-from NavalWargamingVariable import NavalWargamingVariable
-import config
+from NavalWargaming.Simulation import NavalWargaming, config
+from NavalWargaming.Simulation.NavalWargamingVariable import NavalWargamingVariable
 
 
 class SemanticVisitor(Visitor):
     """Visit all nodes
     - Change none node in empty node
     - Checks the declaration of variables
-    - Intialize the wargame
+    - Create the initialization variables for the simulation
     """
 
     def __init__(self):
         self.nwgVariable =None
         self.nwg = None
 
-    def reset(self):
-        self.faction = set()
-
     def InitializeWargame(self):
         return NavalWargaming().initialization(self.nwgVariable)
 
     def visit(self, Program):
-        self.reset()
         self.nwgVariable = NavalWargamingVariable()
         Program.accept(self)
-        print(self.nwgVariable)
 
     def visitProgram(self, Program):
         Program.initial_State.accept(self)
@@ -74,7 +67,6 @@ class SemanticVisitor(Visitor):
         if not Relations.relation_list:
             Relations.relation_list = [Empty()]
             warnings.warn("No relation declared")
-            # todo prendre en compte le cas pas de relation mais plusieurs factions
         else:
             for relation in Relations.relation_list:
                 relation.accept(self)
@@ -123,8 +115,8 @@ class SemanticVisitor(Visitor):
             raise ValueError("Vessel type " + Vessel_Type.type + " not possible")
 
     def visitMap(self, Map):
-        self.Test_MAP_Value(int(Map.x), "Map x")
-        self.Test_MAP_Value(int(Map.y), "Map y")
+        Map.x = self.Test_MAP_Value(int(Map.x), "Map x")
+        Map.y = self.Test_MAP_Value(int(Map.y), "Map y")
         self.nwgVariable.setMap(Map.x,Map.y)
 
     def Test_MAP_Value(self, mapValue, name):
@@ -134,6 +126,7 @@ class SemanticVisitor(Visitor):
         elif (mapValue < config.MAP_MIN):
             warnings.warn("The value of " + name + " is too low, it will be set to " + str(config.MAP_MIN))
             mapValue = config.MAP_MIN
+        return mapValue
 
     def visitIdentifier(self, Identifier):
         pass

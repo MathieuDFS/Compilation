@@ -1,7 +1,5 @@
-
 import re
-from Compiler.NavalWargamingConstants import NWG_LEXEM_REGEXES
-
+from NavalWargaming.Compiler.NavalWargamingConstants import NWG_LEXEM_REGEXES
 import logging
 
 logger = logging.getLogger(__name__)

@@ -1,9 +1,6 @@
 
 class AST_Node():
     """Abstract class for AST nodes"""
-    def __init__(self):
-        pass
-
     def accept(self, visitor):
         """Accept a visitor (pattern visitor)"""
         pass
@@ -15,12 +12,11 @@ class Empty(AST_Node):
         pass
 
     def accept(self, visitor):
-        print("Empty node")
+        pass
 
 class Program(AST_Node):
-    def __init__(self,initial_State, actions):
+    def __init__(self,initial_State):
         self.initial_State: Initial_State = initial_State
-        self.actions: list[Action] = actions
 
     def accept(self, visitor):
         visitor.visitProgram(self)
@@ -36,8 +32,6 @@ class Initial_State(AST_Node):
     def accept(self, visitor):
         visitor.visitInitial_State(self)
 
-class Action(AST_Node):
-    pass # TODO (also add to visitor)
 
 class Factions(AST_Node):
     def __init__(self, faction_list):
@@ -93,6 +87,7 @@ class Flotilla(AST_Node):
         visitor.visitFlotilla(self)
 
     def acceptAndTransmitFaction(self, visitor, faction):
+        """ Accept a visitor (pattern visitor) and transmit the faction to the visitor"""
         visitor.visitFlotilla(self, faction)
 
 class Vessel(AST_Node):

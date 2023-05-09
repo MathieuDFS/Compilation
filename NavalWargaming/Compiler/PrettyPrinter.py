@@ -3,6 +3,10 @@ from AbstractVisitor import Visitor
 
 
 class PrettyPrinter(Visitor):
+    """Visit all nodes
+    and Rewrites the code with the basic formatting
+    """
+
     def __int__(self):
         self.filename = None
         self.file = None

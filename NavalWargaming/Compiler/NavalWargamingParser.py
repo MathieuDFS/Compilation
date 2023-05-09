@@ -1,5 +1,5 @@
 import logging
-from Compiler.NavalWargamingAbstractSyntax import *
+from NavalWargaming.Compiler.NavalWargamingAbstractSyntax import *
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +67,6 @@ class NavalWargamingParser:
             raise
 
     def parse_program(self):
-        AST = Abstract_Syntax_Tree()
         FactionsTree = None
         RelationsTree = None
         FleetsTree = None
@@ -101,7 +100,7 @@ class NavalWargamingParser:
 
         map=self.parse_map()
 
-        AST=Program(Initial_State(FactionsTree,RelationsTree,FleetsTree,map),[])
+        AST=Program(Initial_State(FactionsTree,RelationsTree,FleetsTree,map))
         return AST
 
     def parse_faction(self):

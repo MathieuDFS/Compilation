@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 
 class NavalWargamingMap():
+    """
+    This class is the map of the simulation.
+    """
 
     def __init__(self,x,y):
         self.x = x

@@ -1,5 +1,8 @@
 
 class NavalWargamingFlotilla():
+    """
+    This class is the flotilla class of the simulation.
+    """
     def __init__(self,faction,name,vessels,x,y):
         self.faction = faction
         self.name = name

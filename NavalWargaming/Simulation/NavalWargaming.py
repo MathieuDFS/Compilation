@@ -4,6 +4,9 @@ from NavalWargamingFlotilla import NavalWargamingFlotilla
 import random as rd
 
 class NavalWargaming():
+    """
+    This class is the main class of the simulation.
+    """
     def __init__(self):
         self.map = None
         self.factions = []
@@ -12,6 +15,9 @@ class NavalWargaming():
 
 
     def initialization(self,initialization_variable):
+        """
+        This method initialize the simulation with the variable given by the compiler.
+        """
         if not isinstance(initialization_variable, NavalWargamingVariable):
             raise TypeError("variable must be of type NavalWargamingVariable")
 
