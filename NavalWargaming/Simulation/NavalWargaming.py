@@ -1,7 +1,9 @@
-from NavalWargamingVariable import NavalWargamingVariable
-from NavalWargamingMap import NavalWargamingMap
-from NavalWargamingFlotilla import NavalWargamingFlotilla
 import random as rd
+
+from NavalWargaming.Simulation.NavalWargamingFlotilla import NavalWargamingFlotilla
+from NavalWargaming.Simulation.NavalWargamingMap import NavalWargamingMap
+from NavalWargaming.Simulation.NavalWargamingVariable import NavalWargamingVariable
+
 
 class NavalWargaming():
     """

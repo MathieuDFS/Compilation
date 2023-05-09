@@ -1,5 +1,6 @@
 import sys
-from AbstractVisitor import Visitor
+
+from NavalWargaming.Compiler.AbstractVisitor import Visitor
 
 
 class PrettyPrinter(Visitor):
@@ -19,8 +20,6 @@ class PrettyPrinter(Visitor):
         self.file = open(self.filename+".pp.nwg", "w")
         self.file.write("#"+self.filename+" Pretty print\n")
         Program.initial_State.accept(self)
-        for action in Program.actions:
-            action.accept(self)
         self.file.close()
 
     def visitInitial_State(self, Initial_State):

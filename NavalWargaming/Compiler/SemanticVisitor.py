@@ -1,7 +1,9 @@
 import warnings
-from AbstractVisitor import Visitor
-from NavalWargamingAbstractSyntax import Empty
-from NavalWargaming.Simulation import NavalWargaming, config
+
+from NavalWargaming.Compiler.AbstractVisitor import Visitor
+from NavalWargaming.Compiler.NavalWargamingAbstractSyntax import Empty
+from NavalWargaming.Simulation import config
+from NavalWargaming.Simulation.NavalWargaming import NavalWargaming
 from NavalWargaming.Simulation.NavalWargamingVariable import NavalWargamingVariable
 
 
@@ -25,8 +27,6 @@ class SemanticVisitor(Visitor):
 
     def visitProgram(self, Program):
         Program.initial_State.accept(self)
-        for action in Program.actions:
-            action.accept(self)
 
     def visitInitial_State(self, Initial_State):
         if (Initial_State.factions is None):
