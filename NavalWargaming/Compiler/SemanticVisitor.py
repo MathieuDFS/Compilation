@@ -1,9 +1,8 @@
-import sys
 import warnings
 
 from AbstractVisitor import Visitor
-from NavalWargamingAbstractSyntax import Empty, Identifier, Relation
-from NavalWargaming import NavalWargaming
+from NavalWargamingAbstractSyntax import Empty
+from NavalWargaming.Simulation import NavalWargaming
 from NavalWargamingVariable import NavalWargamingVariable
 import config
 

@@ -1,7 +1,7 @@
-from Compiler.NavalWargamingLexer import NavalWargamingLexem, NavalWargamingLexer
+from Compiler.NavalWargamingLexer import NavalWargamingLexer
 from Compiler.NavalWargamingParser import NavalWargamingParser
-from PrettyPrinter import PrettyPrinter
-from SemanticVisitor import SemanticVisitor
+from NavalWargaming.Simulation.NavalWargaming import PrettyPrinter
+from NavalWargaming.Simulation.NavalWargaming import SemanticVisitor
 
 
 

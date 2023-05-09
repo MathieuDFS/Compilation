@@ -1,8 +1,4 @@
 
-class Abstract_Syntax_Tree(): #todo delete?
-    """Abstract Syntax Tree"""
-    pass
-
 class AST_Node():
     """Abstract class for AST nodes"""
     def __init__(self):

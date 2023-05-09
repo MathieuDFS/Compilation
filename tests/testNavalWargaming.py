@@ -2,8 +2,8 @@
 
 import pytest
 
-from Compiler.NavalWargamingLexer import NavalWargamingLexem, NavalWargamingLexer
-from Compiler.NavalWargamingParser import NavalWargamingParser
+from NavalWargaming.Compiler.NavalWargamingLexer import NavalWargamingLexer
+from NavalWargaming.Compiler.NavalWargamingParser import NavalWargamingParser
 
 
 

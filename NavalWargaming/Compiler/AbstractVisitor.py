@@ -1,7 +1,10 @@
 from abc import ABCMeta, abstractmethod
-import NavalWargamingAbstractSyntax
+
 
 class Visitor(metaclass=ABCMeta):
+    """
+    Abstract visitor of the AST
+    """
 
     @abstractmethod
     def visit(self, Program):
