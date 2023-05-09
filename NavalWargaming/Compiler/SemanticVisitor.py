@@ -19,7 +19,9 @@ class SemanticVisitor(Visitor):
         self.nwg = None
 
     def InitializeWargame(self):
-        return NavalWargaming().initialization(self.nwgVariable)
+        nwg=NavalWargaming()
+        nwg.initialization(self.nwgVariable)
+        return nwg
 
     def visit(self, Program):
         self.nwgVariable = NavalWargamingVariable()

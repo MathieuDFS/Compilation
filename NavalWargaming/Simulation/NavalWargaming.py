@@ -44,7 +44,38 @@ class NavalWargaming():
 
 
     def run(self):
-        self.map.showMap(self.fleets,self.factions)
         print("The simulation part has not been implemented yet.")
+        print("The simulation will cover the rising tension between ", end="")
+        for k in range(len(self.factions)):
+            print(self.factions[k], end="")
+            if k < len(self.factions)-2:
+                print(", ", end="")
+            elif k == len(self.factions)-2:
+                print(" and ", end="")
+            else:
+                print(".")
 
+        print("Their initial relation are ", end="")
+        for index,relation in enumerate(self.relations):
+            if index < len(self.relations)-2:
+                print(relation, self.relations[relation], end=", ")
+            elif index == len(self.relations)-2:
+                print(relation, self.relations[relation], end=" and ")
+            else:
+                print(relation, self.relations[relation], end=".")
+        print("(between -100 and 100).")
+
+        print("There are "+str(len(self.fleets))+" fleets in presence.", end=" ")
+        for index,fleet in enumerate(self.fleets):
+            if index < len(self.fleets)-2:
+                print(fleet.name, "from", fleet.faction, end=", ")
+            elif index == len(self.fleets)-2:
+                print(fleet.name, "from", fleet.faction, end=" and ")
+            else:
+                print(fleet.name, "from", fleet.faction, end=".\n")
+
+
+        print("The simulation will cover ", self.map.x, "x", self.map.y, "km.")
+        print("Here is the map:")
+        self.map.showMap(self.fleets, self.factions)
 
