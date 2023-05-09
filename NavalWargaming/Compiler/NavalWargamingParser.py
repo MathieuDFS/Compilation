@@ -1,5 +1,5 @@
 import logging
-from NavalWargaming.Compiler.NavalWargamingAbstractSyntax import *
+from Compiler.NavalWargamingAbstractSyntax import *
 
 logger = logging.getLogger(__name__)
 

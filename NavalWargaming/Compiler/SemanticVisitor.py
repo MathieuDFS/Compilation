@@ -1,10 +1,10 @@
 import warnings
 
-from NavalWargaming.Compiler.AbstractVisitor import Visitor
-from NavalWargaming.Compiler.NavalWargamingAbstractSyntax import Empty
-from NavalWargaming.Simulation import config
-from NavalWargaming.Simulation.NavalWargaming import NavalWargaming
-from NavalWargaming.Simulation.NavalWargamingVariable import NavalWargamingVariable
+from Compiler.AbstractVisitor import Visitor
+from Compiler.NavalWargamingAbstractSyntax import Empty
+from Simulation import config
+from Simulation.NavalWargaming import NavalWargaming
+from Simulation.NavalWargamingVariable import NavalWargamingVariable
 
 
 class SemanticVisitor(Visitor):

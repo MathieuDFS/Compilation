@@ -1,6 +1,4 @@
-import sys
-
-from NavalWargaming.Compiler.AbstractVisitor import Visitor
+from Compiler.AbstractVisitor import Visitor
 
 
 class PrettyPrinter(Visitor):

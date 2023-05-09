@@ -1,9 +1,9 @@
 import sys
 
-from NavalWargaming.Compiler.NavalWargamingLexer import NavalWargamingLexer
-from NavalWargaming.Compiler.NavalWargamingParser import NavalWargamingParser
-from NavalWargaming.Compiler.PrettyPrinter import PrettyPrinter
-from NavalWargaming.Compiler.SemanticVisitor import SemanticVisitor
+from Compiler.NavalWargamingLexer import NavalWargamingLexer
+from Compiler.NavalWargamingParser import NavalWargamingParser
+from Compiler.PrettyPrinter import PrettyPrinter
+from Compiler.SemanticVisitor import SemanticVisitor
 
 if __name__ == "__main__":
     PrettyPrint =False

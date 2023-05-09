@@ -1,8 +1,8 @@
 import random as rd
 
-from NavalWargaming.Simulation.NavalWargamingFlotilla import NavalWargamingFlotilla
-from NavalWargaming.Simulation.NavalWargamingMap import NavalWargamingMap
-from NavalWargaming.Simulation.NavalWargamingVariable import NavalWargamingVariable
+from Simulation.NavalWargamingFlotilla import NavalWargamingFlotilla
+from Simulation.NavalWargamingMap import NavalWargamingMap
+from Simulation.NavalWargamingVariable import NavalWargamingVariable
 
 
 class NavalWargaming():
