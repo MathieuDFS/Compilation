@@ -4,10 +4,10 @@ import warnings
 class NavalWargamingVariable():
     """A class that contains all the variables for the naval wargame, and the tests to initialize its variables"""
     def __init__(self):
-        #Useful for initalization
+        #Useful for the verification of variables
         self.relationDeclMarker = {}
 
-        #Useful for simulation
+        #Useful for initalization
         self.faction = []
         self.relation= {}
         self.navy = {}
