@@ -1,0 +1,24 @@
+# test la définition de la carte
+
+Factions:
+    -US
+    -Chine
+    -Pirates
+
+Relations:
+    -US-Chine: -50
+
+Fleets:
+    -US fleet:
+        -flottille_Charlie:
+            1 croiseur
+
+    -Chine fleet:
+        -flottille_Alpha:
+            2 destroyer
+
+Map:
+    1000*1000
+
+
+

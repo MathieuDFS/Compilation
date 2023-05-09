@@ -1,0 +1,14 @@
+# test la définition des relations entre les factions
+
+Factions:
+    -US
+    -Chine
+    -Commerce
+
+Relations:
+    -US-Chine: -50
+    -US-Commerce: 100
+    -Chine-Commerce: 100
+
+Map:
+    1000*1000
