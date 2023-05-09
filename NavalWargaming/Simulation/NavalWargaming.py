@@ -42,5 +42,9 @@ class NavalWargaming():
                 nwgFlotilla = NavalWargamingFlotilla(faction, flotilla_name, initialization_variable.navy[faction][flotilla_name],x,y)
                 self.fleets.append(nwgFlotilla)
 
+
+    def run(self):
         self.map.showMap(self.fleets,self.factions)
+        print("The simulation part has not been implemented yet.")
+
 
